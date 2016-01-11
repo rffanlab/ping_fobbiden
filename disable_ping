@@ -1,0 +1,11 @@
+#!/bin/bash
+ifexisticmp=$(cat /etc/sysctl.conf|grep 'net.ipv4.icmp_echo_ignore_all')
+if [[ $ifexisticmp = '' ]];then
+echo "Not Exist"
+echo "net.ipv4.icmp_echo_ignore_all=1">> /etc/sysctl.conf
+else
+echo "Exist"
+sed -i 's/net.ipv4.icmp_echo_ignore_all/#net.ipv4.icmp_echo_ignore_all/g' /etc/sysctl.conf
+echo "net.ipv4.icmp_echo_ignore_all=1">> /etc/sysctl.conf
+fi
+sysctl -p
